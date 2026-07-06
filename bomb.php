@@ -43,10 +43,12 @@ if (isset($_GET['number']) && !empty($_GET['number'])) {
         "Sec-Fetch-Site: same-origin",
         "Priority: u=0"
     ]);
-    curl_setopt($ch1, CURLOPT_COOKIE, "PHPSESSID=" . $phpSessId . "; _ga=GA1.2.1114936498.1783321546; _gid=GA1.2.1816116849.1783321546; _ga_DKN9J9SHT6=GS2.1.s1783321546$o1$g1$t1783321620$j51$l0$h0; __gads=ID=583e45a2d2ddad74:T=1783321548:RT=1783321548:S=ALNI_Mb7pF0RxsvwZK3wdm1w2ZPshuylug; __gpi=UID=00001415cbc43c61:T=1783321548:RT=1783321548:S=ALNI_MYRzyG61s-fxR312dnGTXGy5FeRTg; __eoi=ID=dde3e85afe64c3ef:T=1783321548:RT=1783321548:S=AA-AfjawDzIU-GlUfOrQKDuAykMl; __gsas=ID=ed833ad0bbd8b0dc:T=1783321553:RT=1783321553:S=ALNI_MbEg5T7PdDlUFdKgq3Roldu-0nAdg");
+    
+    curl_setopt($ch1, CURLOPT_COOKIE, 'PHPSESSID=' . $phpSessId . '; _ga=GA1.2.1114936498.1783321546; _gid=GA1.2.1816116849.1783321546; _ga_DKN9J9SHT6=GS2.1.s1783321546$o1$g1$t1783321620$j51$l0$h0; __gads=ID=583e45a2d2ddad74:T=1783321548:RT=1783321548:S=ALNI_Mb7pF0RxsvwZK3wdm1w2ZPshuylug; __gpi=UID=00001415cbc43c61:T=1783321548:RT=1783321548:S=ALNI_MYRzyG61s-fxR312dnGTXGy5FeRTg; __eoi=ID=dde3e85afe64c3ef:T=1783321548:RT=1783321548:S=AA-AfjawDzIU-GlUfOrQKDuAykMl; __gsas=ID=ed833ad0bbd8b0dc:T=1783321553:RT=1783321553:S=ALNI_MbEg5T7PdDlUFdKgq3Roldu-0nAdg');
     curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch1, CURLOPT_TIMEOUT, 30);
     curl_setopt($ch1, CURLOPT_ENCODING, 'gzip, deflate, br, zstd');
+
     $postData2 = http_build_query([
         'mobilenumber' => $number,
         'email' => 'test@example.com'
@@ -99,7 +101,6 @@ if (isset($_GET['number']) && !empty($_GET['number'])) {
         curl_multi_exec($mh, $running);
         usleep(10000);
     } while ($running > 0);
-
     $response1 = curl_multi_getcontent($ch1);
     $response2 = curl_multi_getcontent($ch2);
     $response3 = curl_multi_getcontent($ch3);
@@ -124,7 +125,7 @@ if (isset($_GET['number']) && !empty($_GET['number'])) {
         "data" => [
             "phone" => $number,
             "curr_count" => $curr_count,
-            "total_sent" => $curr_count * 3, // 3 APIs called
+            "total_sent" => $curr_count * 3,
             "apis" => [
                 "greatonlinetools" => [
                     "status_code" => $status1,
